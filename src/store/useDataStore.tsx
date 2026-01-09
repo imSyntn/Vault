@@ -12,7 +12,6 @@ const useDataStore = create<storeType>((set, get) => ({
 
   setValues: (data) => {
     const prev = get();
-    console.log(prev);
     set({ ...prev, ...data });
   },
 }));

@@ -37,7 +37,7 @@ const AddMnemonics = () => {
 
         <div className="space-y-6">
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-primary/5 rounded-xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
             <textarea
               value={data}
               onChange={(e) => setData(e.target.value)}

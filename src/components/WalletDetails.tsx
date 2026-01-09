@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import AlertDialog from "./AlertDialog";
 import { useHandleWallet } from "@/hooks/useHandleWallet";
+import { toast } from "sonner";
 
 const PrivateKeyDetails = ({ privateKey }: { privateKey: string }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -72,6 +73,7 @@ const WalletDetails = () => {
       wallets: [],
     });
     set("save-it", "");
+    toast.success("Deleted successfully.");
   };
 
   const handleDeleteWallet = (publicKey: string) => {
@@ -88,10 +90,11 @@ const WalletDetails = () => {
       const parsedData = JSON.parse(savedData);
       set("save-it", JSON.stringify({ ...parsedData, wallets: updates }));
     }
+    toast.success("Deleted successfully.");
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto space-y-8">
+    <div className="w-full flex-1 max-w-6xl mx-auto space-y-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -109,7 +112,13 @@ const WalletDetails = () => {
           </div>
         </div>
         <div className="flex gap-3">
-          <Button className="glass-button gap-2" onClick={() => createWallet()}>
+          <Button
+            className="glass-button gap-2"
+            onClick={() => {
+              createWallet();
+              toast.success("Wallet added successfully.");
+            }}
+          >
             <Plus className="w-4 h-4" /> Add Wallet
           </Button>
           <AlertDialog action={handleClearWallets} actionLabel="Clear Wallets">

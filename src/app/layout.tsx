@@ -3,6 +3,7 @@ import "../index.css";
 import Header from "../components/Header";
 import { Toaster } from "../components/ui/sonner";
 
+import Footer from "../components/Footer";
 import { ThemeProvider } from "../components/theme-provider";
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function RootLayout({
           <main className="flex flex-col justify-center items-center min-h-screen pt-20 pb-10 px-4 relative z-10">
             {children}
           </main>
+          <Footer />
           <Toaster />
         </ThemeProvider>
       </body>

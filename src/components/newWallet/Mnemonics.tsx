@@ -3,8 +3,6 @@ import { Button } from "../ui/button";
 import { ArrowBigRight, Copy } from "lucide-react";
 import useDataStore from "@/store/useDataStore";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
-// import { generateRecoveryPhases } from "@/lib";
-// import { useEffect } from "react";
 import { useHandleWallet } from "@/hooks/useHandleWallet";
 import { useEffect, useState } from "react";
 import Loader from "../Loader";
@@ -12,7 +10,6 @@ import { Toggle } from "../ui/toggle";
 
 const Mnemonics = () => {
   const mnemonics = useDataStore((state) => state.Mnemonics);
-  const setValues = useDataStore((state) => state.setValues);
   const { createMnemonics, createWallet } = useHandleWallet();
 
   const [loading, setLoading] = useState(true);
@@ -21,10 +18,7 @@ const Mnemonics = () => {
   const copyToClipboard = useCopyToClipboard();
 
   const handleWaletCreation = () => {
-    createWallet();
-    setValues({
-      Mnemonics: { ...mnemonics, isDone: true },
-    });
+    createWallet("", true);
   };
 
   useEffect(() => {
@@ -71,12 +65,11 @@ const Mnemonics = () => {
           <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
             <Toggle
               variant="outline"
-              className="cursor-pointer flex-1 h-12 text-base border-white/10 hover:bg-white/5 hover:text-white transition-all data-[state=on]:[&_svg]:fill-primary"
+              className="cursor-pointer flex-1 min-h-12 text-base border-white/10 hover:bg-white/5 hover:text-white transition-all data-[state=on]:[&_svg]:fill-primary"
               pressed={copied}
               onPressedChange={() => {
                 setCopied(true);
                 copyToClipboard(mnemonics.val);
-                toast.success("Recovery phrase copied to clipboard");
                 setTimeout(() => setCopied(false), 2000);
               }}
             >
