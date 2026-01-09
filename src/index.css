@@ -1,1 +1,157 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Modern Color Palette */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Dark Mode Default (Glassmorphism Base) */
+  --background: #000000;
+  /* Black */
+  --foreground: #f8fafc;
+  /* Slate 50 */
+
+  --card: rgba(30, 41, 59, 0.7);
+  /* Slate 800 with opacity */
+  --card-foreground: #f8fafc;
+
+  --popover: rgba(15, 23, 42, 0.9);
+  --popover-foreground: #f8fafc;
+
+  --primary: #ffffff;
+  /* White */
+  --primary-foreground: #000000;
+
+  --secondary: rgba(51, 65, 85, 0.5);
+  /* Slate 700 with opacity */
+  --secondary-foreground: #f8fafc;
+
+  --muted: rgba(30, 41, 59, 0.5);
+  --muted-foreground: #94a3b8;
+
+  --accent: rgba(255, 255, 255, 0.1);
+  /* White with low opacity */
+  --accent-foreground: #ffffff;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+
+  --border: rgba(148, 163, 184, 0.1);
+  --input: rgba(30, 41, 59, 0.5);
+  --ring: #ffffff;
+
+  --sidebar: #0f172a;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: rgba(255, 255, 255, 0.1);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(148, 163, 184, 0.1);
+  --sidebar-ring: #ffffff;
+}
+
+.dark {
+  /* Same as root for now, enforcing dark mode aesthetic */
+  --background: #000000;
+  --foreground: #f8fafc;
+  --card: rgba(30, 41, 59, 0.7);
+  --card-foreground: #f8fafc;
+  --popover: rgba(15, 23, 42, 0.9);
+  --popover-foreground: #f8fafc;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: rgba(51, 65, 85, 0.5);
+  --secondary-foreground: #f8fafc;
+  --muted: rgba(30, 41, 59, 0.5);
+  --muted-foreground: #94a3b8;
+  --accent: rgba(255, 255, 255, 0.1);
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: rgba(148, 163, 184, 0.1);
+  --input: rgba(30, 41, 59, 0.5);
+  --ring: #ffffff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased min-h-screen selection:bg-primary/20 selection:text-primary;
+    background-image:
+      radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.05), transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.05), transparent 25%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-card/30 backdrop-blur-xl border border-white/10 shadow-xl;
+  }
+
+  .glass-input {
+    @apply bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20 backdrop-blur-sm transition-all duration-300;
+  }
+
+  .glass-button {
+    @apply bg-primary/90 hover:bg-primary text-primary-foreground transition-all duration-300;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-button:hover {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+  }
+
+  .neumorphic-inset {
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), inset -2px -2px 5px rgba(255, 255, 255, 0.05);
+  }
+}
